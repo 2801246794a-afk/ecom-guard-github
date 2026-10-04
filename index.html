@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="电商运营把关台：商品文案风险提示与利润测算工具" />
+    <title>电商运营把关台</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">SARTOREN OPS TOOLKIT · GITHUB PAGES READY</p>
+          <h1>电商运营把关台</h1>
+          <p class="hero-copy">发布前先过一遍：文案有没有高风险表达，价格到底能不能留出利润。</p>
+        </div>
+        <div class="hero-badge"><span class="dot"></span>本地计算 · 不上传数据</div>
+      </header>
+
+      <section class="notice">
+        <div class="notice-icon">i</div>
+        <div>
+          <strong>适合做发布前自查</strong>
+          <p>检测报告、平台后台费率和实际售后数据，仍然要以对应的正式资料为准。本工具只做风险提示与估算，不构成法律意见。</p>
+        </div>
+      </section>
+
+      <nav class="tabs" aria-label="工具切换">
+        <button class="tab active" data-tab="compliance">① 文案合规自查</button>
+        <button class="tab" data-tab="pricing">② 定价利润测算</button>
+      </nav>
+
+      <section id="compliance" class="panel active-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="section-kicker">COPY CHECK</p>
+            <h2>商品文案风险扫描</h2>
+          </div>
+          <span class="muted">标题 / 主图 / 详情页 / 直播话术都可以贴进来</span>
+        </div>
+
+        <div class="grid two-col">
+          <div class="card input-card">
+            <label for="copyText">待检查文案</label>
+            <div class="chips" aria-label="示例文案">
+              <button class="chip" data-example="山羊绒针织开衫，柔软亲肤，通勤和日常都好搭。">保守示例</button>
+              <button class="chip" data-example="100%纯羊绒，全网最低价，穿一次就知道有多保暖！">高风险示例</button>
+              <button class="chip" data-example="42%亚麻58%羊绒混纺开衫，成分以吊牌和检测资料为准。">混纺示例</button>
+            </div>
+            <textarea id="copyText" rows="9" placeholder="粘贴商品标题、主图文案或详情页段落……">山羊绒针织开衫，柔软亲肤，通勤和日常都好搭。</textarea>
+            <div class="field-row">
+              <label for="evidenceStatus">材质证据状态</label>
+              <select id="evidenceStatus">
+                <option value="report">有对应检测报告</option>
+                <option value="supplier" selected>仅供应商 / 项目口径</option>
+                <option value="pending">待确认，尚未取得书面资料</option>
+              </select>
+            </div>
+            <button id="scanBtn" class="primary-btn">开始扫描</button>
+          </div>
+
+          <div class="card result-card" id="complianceResult" aria-live="polite">
+            <div class="result-empty">
+              <div class="empty-mark">✓</div>
+              <h3>等待扫描</h3>
+              <p>点击左侧“开始扫描”，查看命中的表达、证据提醒和建议改法。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="guardrail-row">
+          <div class="guardrail"><span class="level p0">P0</span><div><strong>高风险表达</strong><p>如“全网最低”“第一”“100%”等，发布前建议直接删除或补齐证据。</p></div></div>
+          <div class="guardrail"><span class="level p1">P1</span><div><strong>资质 / 功效核验</strong><p>如“抗菌”“防螨”“医用”等，需要对应资质或检测支撑。</p></div></div>
+          <div class="guardrail"><span class="level p2">P2</span><div><strong>材质证据提醒</strong><p>“山羊绒”可以作为经营口径，但不要在无报告时扩写成纯度百分比。</p></div></div>
+        </div>
+      </section>
+
+      <section id="pricing" class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="section-kicker">PRICE CHECK</p>
+            <h2>一单到底赚不赚钱</h2>
+          </div>
+          <span class="muted">按支付单估算，退货率主要增加逆向物流与损耗压力</span>
+        </div>
+
+        <div class="grid two-col">
+          <div class="card input-card">
+            <div class="form-grid">
+              <div class="field"><label for="cost">货品成本（元）</label><input id="cost" type="number" value="128" min="0" step="0.01" /></div>
+              <div class="field"><label for="price">计划售价（元）</label><input id="price" type="number" value="299" min="0" step="0.01" /></div>
+              <div class="field"><label for="shipping">发货运费（元）</label><input id="shipping" type="number" value="8" min="0" step="0.01" /></div>
+              <div class="field"><label for="packaging">包材 / 损耗（元）</label><input id="packaging" type="number" value="2" min="0" step="0.01" /></div>
+              <div class="field"><label for="platformFee">平台 / 支付费率（%）</label><input id="platformFee" type="number" value="5" min="0" max="100" step="0.1" /></div>
+              <div class="field"><label for="adRatio">投放成本占比（%）</label><input id="adRatio" type="number" value="10" min="0" max="100" step="0.1" /></div>
+              <div class="field"><label for="creatorRatio">达人佣金占比（%）</label><input id="creatorRatio" type="number" value="0" min="0" max="100" step="0.1" /></div>
+              <div class="field"><label for="returnRate">预估退货率（%）</label><input id="returnRate" type="number" value="18" min="0" max="100" step="0.1" /></div>
+            </div>
+            <button id="calculateBtn" class="primary-btn">重新测算</button>
+          </div>
+
+          <div class="card result-card" id="pricingResult" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <footer>
+        <span>电商运营把关台 · 静态开源版</span>
+        <span>平台费率和规则会变化，发布前请以商家后台为准</span>
+      </footer>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
